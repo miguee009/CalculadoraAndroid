@@ -15,6 +15,13 @@ import org.mariuszgromada.math.mxparser.mXparser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    /*Declaracion de variables(un TextView para mostrar los resultados
+    * de la calculadora,varios Button que componen la calculadora y
+    * una variable int anterior que hace referencia al boton anterior
+    * pulsado en una nueva instancia de onclick,ya que se desea que
+    * despues de efectuar un igual y se muestre el resultado la
+    * proxima digitacion sera una nueva operacion en un textview
+    * "limpio" */
     TextView texto;
     Button uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,punto
             ,cero,mas,menos,igual,mult,div,ca,mod,del,potn,salir;
@@ -25,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*Asigando de un id a las variables*/
         texto = (TextView)findViewById(R.id.mitexto);
         uno = (Button)findViewById(R.id.boton1);
         dos = (Button)findViewById(R.id.boton2);
@@ -47,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         del = (Button)findViewById(R.id.delete);
         potn = (Button)findViewById(R.id.potn);
         salir = (Button)findViewById(R.id.salir);
-
+        /*Esperando por una pulsacion de botones*/
         uno.setOnClickListener(this);
         dos.setOnClickListener(this);
         tres.setOnClickListener(this);
@@ -73,13 +81,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        /*Declaracion de variables result para obtener el texto del boton
+        * pulsado actualmente y cola para obtener el texto que se tiene
+        * en el textview*/
         String result;
         String cola;
 
+        /*Cuando el id de la llamada anterior a onclick fue un igual
+        * seteamos texto a vacio para que no quede en pantalla restos
+        * del resultado anterior al ejecutar una nueva operacion*/
         if(anterior==R.id.botonigual){
             texto.setText("");
         }
-
+        /*Obtenemos el id del boton pulsado y segun el id efectuamos
+        * una operacion para cada boton*/
         switch (v.getId()){
             case R.id.boton1:
                 result = uno.getText().toString();
@@ -199,6 +214,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dialog.show();
                 break;
         }
+        /*asignamos el numero de id para saber si en la proxima llamada
+        * a la funcion seteamos texview en vacio*/
         anterior = v.getId();
     }
 }
